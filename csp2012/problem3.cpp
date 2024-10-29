@@ -13,13 +13,13 @@ int hashValue(string s){
 void add(string s){
     int pos = hashValue(s);
     for(int i = pos; i<HASHSIZE; i++){
-        if(hashTable[i].empty() || hashTable[i] = s){
+        if(hashTable[i].empty() || hashTable[i] == s){
             hashTable[i] = s;
             return;
         }
     }
     for(int i = 0; i<pos; i++){
-        if(hashTable[i].empty() || hashTable[i] = s){
+        if(hashTable[i].empty() || hashTable[i] == s){
             hashTable[i] = s;
             return;
         }
