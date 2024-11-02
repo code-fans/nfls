@@ -1,44 +1,32 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-
-#define CEIL(a,b)  ( (a)%(b)==0?(a)/(b):(a)/(b)+1 )
-
-int n, a, b , c;
-int h[100100];
-
-bool check(int days){
-    int td = 0;
-    int ps = days * b;
-    for(int i=0; i<n; i++){
-        if(h[i] > ps){
-            td += CEIL(h[i]-ps, c);
-            if(td>days)
-                return false;
-        }
-    }
-    return true;
+long long c[200000];
+bool cheak(long long b,long long n,long long k,long long z,long long f){
+    long long d=0;
+    for (long long i = 0; i < n; i++)
+        if((c[i]-f*b)>0)
+            d+=(c[i]-f*b+z-f-1)/(z-f);
+    return d<=k;
 }
 
 int main(){
-    cin >> n >> a >>b;
-    int m = 0;
-    for(int i=0; i<n; i++){
-        cin >> h[i];
-        if(m<h[i]){
-            m = h[i];
-        }
+    long long n,a,b,m=0;
+    cin>>n>>a>>b;
+    for (long long i = 0; i < n; i++){
+        cin>>c[i];
+        if(m<c[i])
+            m=c[i];
     }
-    c = a-b;
-    int l =  CEIL(m, a)-1;
-    m = CEIL(m, b) +1;
-    while(l+1<m){
-        int mid = (l+m) / 2;
-        if(check(mid)){
-            m = mid;
-        } else {
-            l = mid;
-        }
+    long long l=(m+a-1)/a-1, r=(m+b-1)/b+1;
+
+    while (l+1<r){
+        long long mid=(l+r)/2;
+        if(cheak(mid,n,mid,a,b))
+            r=mid;
+        else
+            l=mid;
     }
-    cout << m << endl;
+
+    cout<<r<<endl;
     return 0;
 }

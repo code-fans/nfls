@@ -1,20 +1,29 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
 using namespace std;
-
-int n,A1,k;
-int A[10000100];
-
-int main(){
-    long long p = 1000000007;
-    cin >> n >> A1 >> k;
-    A1 %= p;
-    A[0]=A1;
-    for(int i=1; i<n; i++){
-        long long temp = A[i-1];
-        temp = temp * temp % p;
-        A[i] = temp;
+int main()
+{
+    freopen("imena.in","r",stdin);
+    freopen("imena.out","w",stdout);
+    int i=0,n,ans=0;
+    cin>>n;
+    string str;
+    while (i<n){
+        cin>>str;
+        int p=1;
+        if(str[0]<'A'||str[0]>'Z')
+            p=0;
+        for (int j = 1; j < str.size(); j++){
+            if(str[j]=='.'||str[j]=='!'||str[j]=='?'){
+                i++;
+                ans+=p;
+                cout<<ans<<endl;
+                ans=0;
+                p=0;
+            } else if(!(str[j]>='a'&&str[j]<='z'))
+                p=0;
+        }
+        ans+=p;
     }
-    nth_element(A, A+k-1, A+n, greater<int>());
-    cout << A[k-1]  << endl;
     return 0;
 }

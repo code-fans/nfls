@@ -1,30 +1,31 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <algorithm>
 using namespace std;
-long long a[200000],b[200000];
+long long a[200200]={0},b[200200]={0};
 int main()
 {
-	int n,n1,s;
+	long long n,n1,s;
 	cin>>n>>n1>>s;
-    long long sum=0;
-	for(int i=0;i<n;i++){
+	for(int i=1;i<=n;i++){
 		cin>>a[i];
-        sum += a[i];
-        a[i] = sum;
-    }
-    sum = 0;
-	for(int i=0;i<n1;i++){
-		cin>>b[i];
-        sum += b[i];
-        b[i] = sum;
-    }
-    long long sy;
-    int ans = upper_bound(b, b+n1, s) - b;
-	for(int i=0; i<n && a[i]<=s; i++){
-        int bpos = upper_bound(b, b+n1, s - a[i]) - b;
-        if(ans < i + bpos + 1){
-            ans = i + bpos + 1;
-        }
+		a[i]+=a[i-1];
 	}
-	cout<<ans<<endl;
+	for(int i=1;i<=n1;i++){
+		cin>>b[i];
+		b[i]+=b[i-1];
+	}
+	int ans = upper_bound(a+1,a+n+1,s)-a-1;
+	for (int i = 1; i <= n1 && b[i]<=s; i++){
+		int ab = upper_bound(a+1,a+n+1,s-b[i])-a-1;
+		if(ab+i>ans)
+			ans=ab+i;
+	}
+	
+	cout<< ans << endl;
 	return 0;
 }
+/**
+ 4 4 5
+ 2 2 2 2
+ 1 3 3 3 
+ */
