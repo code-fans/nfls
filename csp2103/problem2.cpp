@@ -7,7 +7,7 @@ int main(){
     cin >> N >> K;
     for(int i=0; i<N; i++){
         cin >> a;
-        if(a==1){
+        if(a==1){// 把a==1换成 a==2 是否可以？
             data[i%K] ++;
         }
     }
