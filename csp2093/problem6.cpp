@@ -1,40 +1,33 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cmath>
 using namespace std;
-
-int n,m,k;
-int A[40040], B[40040];
-
-bool check(int x){
-    int cut = 0;
-    for(int i=0; i<n && A[i]<=x; i++){
-        int bpos = upper_bound(B, B+m, x-A[i]) - B;
-        cut += bpos;
-        if(cut > k-1){
-            return true;
+int main()
+{
+    freopen("swap.in","r",stdin);
+    freopen("swap.out","w",stdout);
+    int n,a[100000], c,c1=0;
+    cin>>n;
+    for (int i = 0; i < n; i++){
+        cin>>a[i];
+    }
+    cin>>c;
+    bool j=true;
+    for (int i = 1; c1 < c; i++){
+        if(a[i-1]<a[i]){
+            c1++;
+            swap(a[i-1],a[i]);
+            j=false;
+        }
+        if(i==n-1){
+            if(j)
+                break;
+            i=1;
+            j=true;
         }
     }
-    return false;
-}
-
-int main(){
-    cin >> n >> m >> k;
-    for(int i=0; i<n; i++){
-        cin >> A[i];
+    for (int i = 0; i < n; i++){
+        cout<<a[i]<<' ';
     }
-    for(int i=0; i<m; i++){
-        cin >> B[i];
-    }
-    int l = A[0] + B[0];
-    int x = A[n-1] + B[m-1] + 1;
-
-    while(l+1<x){
-        int mid = (l+x) / 2;
-        if(check(mid)){
-            x = mid;
-        } else {
-            l = mid;
-        }
-    }
-    cout << x << endl;
+    cout<<endl;
     return 0;
 }

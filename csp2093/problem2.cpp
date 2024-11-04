@@ -1,41 +1,29 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-
-#define CEIL(a,b) (a)%(b)==0?(a)/(b):(a)/(b)+1
-
- int N,K;
-int A[200100];
-
-bool check(int block){
-    int p = 0;
-    for(int i=0; i<N; i++){
-        p += CEIL(A[i], block) - 1;
-        if(p>K){
-            return false;
-        }
-    }
-    return true;
+long long a[300000];
+bool check(int b,int n,int k){
+    long long d=0;
+    for(int i=0;i<n;i++)
+        d+=(a[i]-1+b)/b-1;
+    return k>=d;
 }
-
-int main(){
-    cin >> N >> K;
-    int m=0;
-    for(int i=0; i<N; i++){
-        cin >> A[i];
-        if(m<A[i]){
-            m = A[i];
-        }
+int main()
+{
+    int n,k,m=0;
+    cin>>n>>k;
+    for (int i = 0; i < n; i++){
+        cin>>a[i];
+        if(a[i]>m)
+            m=a[i];
     }
-    int l = CEIL(m,K);
-    m++;
-    while(l+1<m){
-        int mid = (l+m) / 2;
-        if(check(mid)){
-            m = mid;
-        } else {
-            l = mid;
-        }
+    int l=(m-1)/(k+1),r=m;
+    while (l+1<r){
+        int mid=(l+r)/2;
+        if(check(mid,n,k))
+            r=mid;
+        else
+            l=mid;
     }
-    cout << m << endl;
+    cout<<r<<endl;
     return 0;
 }
