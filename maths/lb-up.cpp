@@ -3,7 +3,7 @@ using namespace std;
 
 int lb(int ar[], int len, int v){
     int l=0, r=len;
-    while(l<r){
+    while(l<r-1){
         int mid = (l+r) / 2;
         if(ar[mid] >= v){
             r = mid;
@@ -16,7 +16,7 @@ int lb(int ar[], int len, int v){
 
 int ub(int ar[], int len, int v){
     int l=0, r=len;
-    while(l<r){
+    while(l<r-1){
         int mid = (l+r) / 2;
         if(ar[mid] <= v){
             l = mid;
