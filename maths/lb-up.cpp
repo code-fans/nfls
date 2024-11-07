@@ -18,10 +18,10 @@ int ub(int ar[], int len, int v){
     int l=-1, r=len;
     while(l<r-1){
         int mid = (l+r) / 2;
-        if(ar[mid] <= v){
-            l = mid;
-        } else {
+        if(ar[mid] > v){
             r = mid;
+        } else {
+            l = mid;
         }
     }    
     return r;
