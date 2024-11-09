@@ -1,7 +1,5 @@
 #include <iostream>
 #include <chrono>
-#include <cmath>
-
 using namespace std;
 
 int pn[10000000];
@@ -80,7 +78,7 @@ void simple(int maxN, bool isPrint){
     int pSum = 1;
     for(int i=3; i<=maxN; i++){
         bool isP = true;
-        for(int j=0; pn[j]<=sqrt(i+1); j++){
+        for(int j=0; pn[j]*pn[j]<=i; j++){
             if(i % pn[j]==0){
                 isP = false;
                 break;
