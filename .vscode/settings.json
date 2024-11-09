@@ -135,5 +135,6 @@
     "C_Cpp.errorSquiggles": "disabled",
     "baidu.comate.key": "35725b59-0b11-4007-aed3-be83100378ff",
     "baidu.comate.username": "codefan",
-    "baidu.comate.inlineSuggestionMode": "精准优先"
+    "baidu.comate.inlineSuggestionMode": "精准优先",
+    "workbench.colorTheme": "Default Dark Modern"
 }
