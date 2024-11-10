@@ -1,31 +1,33 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <utility>
+#include <map>
+#include <set>
+#include <string>
 using namespace std;
-
 int main(){
-    vector<string> oldForm;
+    vector<pair<string, string> > oldForm;
     map<string, set<string> > newForm;
-    int n;
     string sn;
-    cin>> n;
-    for(int i=0; i<n; i++){
-        cin >> sn;
-        oldForm.push_back(sn);
-        string name = sn.substr(0, sn.find('-'));
-        string place = sn.substr(sn.find('-')+1);
+    int n;
+    cin>>n;
+    for (int i = 0; i < n; i++){
+        cin>>sn;
+        int s=sn.find('-');
+        string name = sn.substr(0,s);
+        string place = sn.substr(s+1);
+        oldForm.push_back({name,place});
         newForm[name].insert(place);
     }
-
-    for(int i=0; i<n; i++){
-        cout << oldForm[i];
-        string name = oldForm[i].substr(0, oldForm[i].find('-'));
-        string place = oldForm[i].substr(oldForm[i].find('-')+1);
-        for(string s: newForm[name]){
-            if(s!=place){
-                cout <<',' << s;
-            }
+    
+    for (int i = 0; i < n; i++){
+        cout<<oldForm[i].first<<'-'<<oldForm[i].second;
+        for (string s:  newForm[oldForm[i].first]){
+            if(s!= oldForm[i].second)
+                cout << ',' << s ;
         }
-        cout << endl;
+        cout<<endl;
     }
-
+    
     return 0;
 }
