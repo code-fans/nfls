@@ -31,7 +31,7 @@ int rightMostOne(int n) {
     return n & (-n);
 }
 
-// 最左侧的 1 
+// 最左侧的 1 注意不适合负数，负数右移位 会补1
 int leftMostOne(int n) {
     // 确保 第一个 1 后面的所有位 都是 1
     n |= (n >> 1);
@@ -44,11 +44,11 @@ int leftMostOne(int n) {
 
 
 int main(){
-    int n=12356;
+    int n=12345678;
     chaifen(n);
     cout << endl;
-    cout << leftMostOne(n) << endl;
-    cout << bitCount(n) << endl;
-    cout << hammingDistance(n, n-leftmostOne(n)) << endl;
+    cout << leftMostOne(-1) << endl;
+    cout << rightMostOne(-1) << endl;
+    cout << hammingDistance(n, n-leftMostOne(n)) << endl;
     return 0;
 }
