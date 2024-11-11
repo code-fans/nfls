@@ -2,7 +2,7 @@
 using namespace std;
 
 // https://www.luogu.com.cn/problem/P7071
-// Âå¹ÈµÄP7071Äã¾õµÃÕâ¸ö´úÂëÄÜÕıÈ·Âğ£¿
+// æ´›è°·çš„P7071ä½ è§‰å¾—è¿™ä¸ªä»£ç èƒ½æ­£ç¡®å—ï¼Ÿ
 void chaifen(int n){
     if(n==0) return;
     int p = n & (-n);
@@ -11,7 +11,7 @@ void chaifen(int n){
     cout << p << ' ';
 }
 
-// Brian Kernighan Ëã·¨?  ²¼À³¶÷¡¤¿ÂÁÖºº Ëã·¨
+// Brian Kernighan ç®—æ³•?  å¸ƒè±æ©Â·æŸ¯æ—æ±‰ ç®—æ³•
 int bitCount(int n){
     int bs = 0;
     while(n!=0){
@@ -21,19 +21,19 @@ int bitCount(int n){
     return bs;
 }
 
-//ººÃ÷¾àÀë
+//æ±‰æ˜è·ç¦»
 int hammingDistance(int x, int y){
     return bitCount(x ^ y);
 }
 
-// ×îÓÒ²àµÄ 1 
+// æœ€å³ä¾§çš„ 1 
 int rightMostOne(int n) {
     return n & (-n);
 }
 
-// ×î×ó²àµÄ 1 ×¢Òâ²»ÊÊºÏ¸ºÊı£¬¸ºÊıÓÒÒÆÎ» »á²¹1
+// æœ€å·¦ä¾§çš„ 1 æ³¨æ„ä¸é€‚åˆè´Ÿæ•°ï¼Œè´Ÿæ•°å³ç§»ä½ ä¼šè¡¥1
 int leftMostOne(int n) {
-    // È·±£ µÚÒ»¸ö 1 ºóÃæµÄËùÓĞÎ» ¶¼ÊÇ 1
+    // ç¡®ä¿ ç¬¬ä¸€ä¸ª 1 åé¢çš„æ‰€æœ‰ä½ éƒ½æ˜¯ 1
     n |= (n >> 1);
     n |= (n >> 2);
     n |= (n >> 4);
