@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+// https://www.luogu.com.cn/problem/P7071
+// 洛谷的P7071你觉得这个代码能正确吗？
 void chaifen(int n){
     if(n==0) return;
     int p = n & (-n);
