@@ -1,7 +1,7 @@
 #include <iostream>
-#include <map>
+#include <unordered_map>
 using namespace std;
-map<int, int> a;
+unordered_map<int, int> a;
 int main()
 {
     int n,k,b,ans=0;
