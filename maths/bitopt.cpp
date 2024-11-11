@@ -5,8 +5,22 @@ void chaifen(int n){
     if(n==0) return;
     int p = n & (-n);
     // chaifen(n-p);
+    // Brian KernighanËã·¨?
     chaifen(n & (n-1));
     cout << p << ' ';
+}
+
+int bitCount(int n){
+    int bs = 0;
+    while(n!=0){
+        bs++;
+        n &= n-1;
+    }
+    return bs;
+}
+
+int hammingDistance(int x, int y){
+    return bitCount(x ^ y);
 }
 
 int leftmostOne(int n) {
@@ -24,7 +38,7 @@ int main(){
     chaifen(n);
     cout << endl;
     cout << leftmostOne(n) << endl;
-
-    cout << leftmostOne(15) << endl;
+    cout << bitCount(n) << endl;
+    cout << hammingDistance(n, n-leftmostOne(n)) << endl;
     return 0;
 }
