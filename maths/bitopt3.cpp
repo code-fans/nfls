@@ -8,6 +8,7 @@ int main()
     cin>>n;
     while (n){
         ans++;
+        // string str = bitset<32>(n).to_string();
         cout<< bitset<32>(n) << ' '<< n << '\t' << bitset<32>(n-1) << ' ' << n-1 << endl;
         n&=(n-1);
     }
