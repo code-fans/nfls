@@ -57,7 +57,8 @@ long long catalan5(int n){
 
 int main()
 {
-    cout << catalan1(10)<<' ' << catalan2(10)<<' ' << catalan3(10)
-        <<' ' << catalan4(10)<<' ' << catalan5(10)<<endl;
+    int n = 50;
+    cout << catalan1(n)<<' ' << catalan2(n)<<' ' << catalan3(n)
+        <<' ' << catalan4(n)<<' ' << catalan5(n)<<endl;
     return 0;
 }
