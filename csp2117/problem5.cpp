@@ -11,21 +11,20 @@ int splitChocolate(int l, int w, int d){
         tmp = w*w + splitChocolate(l-l1, w, d-l1*w);
         if(tmp<ans) ans = tmp;
     }
-    if(l>l1+1){
-        tmp = w*w + splitChocolate(l-l1-1, w, l1*w+w-d);
+    if(l>l1+1 && d>l1*w){
+        tmp = w*w + splitChocolate(l1+1, w, d);
         if(tmp<ans) ans = tmp;
     }
-
     int w1 = d/l;
     if(w1>0){
         tmp = l*l+ splitChocolate(l, w-w1, d-l*w1);
         if(tmp<ans) ans = tmp;
     }
-
-    if(w>w1+1){
-        tmp = l*l+ splitChocolate(l, w-w1-1, l*w1+l-d);
+    if(w>w1+1 && d>w1*l){
+        tmp = l*l+ splitChocolate(l, w1+1, d);
         if(tmp<ans) ans = tmp;
     }
+
     return ans;
 }
 
