@@ -130,7 +130,10 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "xhash": "cpp",
-        "resumable": "cpp"
+        "resumable": "cpp",
+        "ccomplex": "cpp",
+        "ctgmath": "cpp",
+        "cstdalign": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "baidu.comate.key": "35725b59-0b11-4007-aed3-be83100378ff",
