@@ -29,6 +29,7 @@ int splitChocolate(int l, int w, int d){
 }
 
 int main(){
+    freopen("../csp2117/input.in", "r", stdin);
     int n, a,b,c;
     cin>>n;
     while(n--){
