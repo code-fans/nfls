@@ -10,6 +10,11 @@ int catalan1(int ca){
             num[n] += num[i]*num[n-i-1];
         }
     }
+    for(int i=1; i<=ca; i++){
+        cout << num[i] << '\t';
+        if(i%5==0)
+            cout << endl;
+    }
     return num[ca];
 }
 int catalan2(int n){
@@ -17,6 +22,20 @@ int catalan2(int n){
         return 1;
     return catalan2(n-1)*(4*n-2)/(n+1);
 }
+
+long long catalan22(int n){
+    long long ca=1;
+    cout << 1 << '\t';
+    for(int i=2; i<=n; i++){
+        ca = ca * (4*i - 2) / (i+1);
+        cout << ca << '\t';
+        if(i%5==0)
+            cout << endl;
+    }
+    return ca;
+}
+
+
 int catalan3(int n){
     long long num=1;
     for(int i=0;i<n;i++){
@@ -42,12 +61,25 @@ int catalan5(int n){
             a[j]+=a[j-1];
         }
     }
+    for(int i=1; i<=n; i++){
+        cout << a[i] << '\t';
+        if(i%5==0)
+            cout << endl;
+    }
     return a[n];
 }
 int main()
 {
     int n;
     cin>>n;
-    cout<<catalan4(n)<<endl<<catalan2(n)<<endl<<catalan3(n)<<endl<<catalan4(n)<<endl<<catalan5(n)<<endl;
+    catalan1(n);
+    cout<<endl;
+    catalan5(n);
+    cout<<endl;
+    catalan22(n);
+    /*<<catalan2(n)<<endl
+    <<catalan3(n)<<endl<<catalan4(n)
+    <<endl<<catalan5(n)<<endl<<catalan22(n)<<endl;
+    */
     return 0;
 }
