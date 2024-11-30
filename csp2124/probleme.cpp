@@ -5,10 +5,6 @@
 using namespace std;
 long long ans[10100];
 int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-
     int W, N, l, r, v;
     cin >> W >> N;
     memset(ans,-1,sizeof(ans));
@@ -32,6 +28,5 @@ int main(){
         }
     }
     cout << ans[W] << endl;
-    
     return 0;
 }
