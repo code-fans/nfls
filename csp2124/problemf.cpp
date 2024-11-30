@@ -22,7 +22,7 @@ int main(){
     for(int i=0; i<N; i++){
         long long r = gcm(A[i], K);
         for(const auto& pair : two){
-            if(gcm(pair.first * r, K) == K){
+            if( (pair.first * r) % K == 0){
                 ans += pair.second;
             }
         }
