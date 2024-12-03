@@ -18,7 +18,7 @@ int main(){
             timeMap[x] = t;
         }
         int ans = 0;
-        for(auto p : timeMap){
+        for(unordered_map<int, int>::iterator & p : timeMap){
             if(p.second > t-86400){
                 ans ++;
             }
