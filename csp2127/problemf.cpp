@@ -18,8 +18,8 @@ int main(){
             timeMap[x] = t;
         }
         int ans = 0;
-        for(unordered_map<int, int>::iterator & p : timeMap){
-            if(p.second > t-86400){
+        for(unordered_map<int, int>::iterator p = timeMap.begin(); p!=timeMap.end(); p++){
+            if(p->second > t-86400){
                 ans ++;
             }
         }
