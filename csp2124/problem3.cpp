@@ -18,6 +18,7 @@ void dfs(int c,int len){
         }
     }
 }
+
 int main()
 {
     cin>>n;
