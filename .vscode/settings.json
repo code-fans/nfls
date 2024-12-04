@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.tex": "latex",
         "cstdlib": "c",
         "locale": "c",
         "ostream": "c",
@@ -133,7 +134,10 @@
         "resumable": "cpp",
         "ccomplex": "cpp",
         "ctgmath": "cpp",
-        "cstdalign": "cpp"
+        "cstdalign": "cpp",
+        "__verbose_abort": "cpp",
+        "execution": "cpp",
+        "print": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "baidu.comate.key": "35725b59-0b11-4007-aed3-be83100378ff",
