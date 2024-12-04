@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int X[15100], P[15100]={0}, A[15100], B[15100], C[15100], D[15100];
+long long X[150100], P[105100]={0}, A[150100], B[151000], C[151000], D[151000];
 int N,M, minX=1510000, maxX = -1;
 
 int main(){
