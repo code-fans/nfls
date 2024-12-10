@@ -3,6 +3,7 @@
 #include <set>
 #include <utility>
 using namespace std;
+
 int edge[128][2];
 int kg[128][2];
 int main(){
