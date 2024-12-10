@@ -1,5 +1,6 @@
 #include <iostream>
 #include <unordered_map>
+#include <cstdio>
 using namespace std;
 
 unordered_map<int, int> timeMap;
@@ -10,11 +11,11 @@ int main(){
     cout.tie(0);
 
     int n, t, m, x;
-    cin >> n;
+    scanf("%d",&n);
     while(n--){
-        cin >> t >> m;
+        scanf("%d%d",&t,&m);
         while(m--){
-            cin >> x;
+            scanf("%d",&x);
             timeMap[x] = t;
         }
         int ans = 0;
@@ -23,7 +24,7 @@ int main(){
                 ans ++;
             }
         }
-        cout << ans << endl;
+        printf("%d\n",ans);
     }
 
     return 0;
