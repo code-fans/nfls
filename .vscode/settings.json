@@ -137,7 +137,8 @@
         "cstdalign": "cpp",
         "__verbose_abort": "cpp",
         "execution": "cpp",
-        "print": "cpp"
+        "print": "cpp",
+        "generator": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "baidu.comate.key": "35725b59-0b11-4007-aed3-be83100378ff",
