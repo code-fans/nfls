@@ -2,7 +2,7 @@
 using namespace std;
 int main()
 {
-    int R,D,S,a[15];
+    int R,D,S,a[15]={0};
     cin>>R>>D>>S;
     for (int i = 0; i < D; i++){
         int num,num1;
@@ -15,7 +15,7 @@ int main()
         cin>>num>>num1;
         a[num] |=1<<(num1+10);
     }
-    
+
     set<pair<int ,int >> foot;
     const pair<int ,int > e = {R,1<<R};
     queue<tuple<int,int,int>> qu;
@@ -27,7 +27,7 @@ int main()
         const int r=get<0>(st);
         int s = get<1>(st);
         for (int j = 1; j <= R; j++){
-            if(a[r]&1<<(j+10)){
+            if(a[r] & 1<<(j+10)){
                 int ss = s^(1<<j);
                 pair<int ,int > nextSt={r,ss};
                 if(nextSt == e){
