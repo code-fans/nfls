@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <set>
+#include <tuple>
 #include <utility>
 using namespace std;
 
@@ -15,54 +16,48 @@ int main(){
     for(int i=0; i<S; i++){
         cin >> kg[i][0] >> kg[i][1];
     }
-    int b = (1 << 16) + (1 << 1);
-    const int e = (R << 16) + (1<<R);
-    int step = 1;
-    queue <pair<int, int> > qu;
-    set<int> foot;
-    qu.push({b, 0});
+    pair<int, int> b = {1, 1<<1 };
+    const pair<int, int> e = {R , 1 << R};
+    queue< tuple  <int, int, int > > qu;
+    set<pair<int, int>> foot;
+    qu.push({1 , 1<<1, 0});
     foot.insert(b);
-
     while(!qu.empty()){
-        pair<int, int> st = qu.front();
-        int c = st.first;
+        tuple<int, int, int> st = qu.front();
         qu.pop();
-        const int r = c >> 16;
-        int s = c & ((1<<16)-1);
+        const int r = get<0>(st);
+        int s = get<1>(st);
         for(int i=0; i<S; i++){
             if(kg[i][0] == r){
-                int next = (r << 16) + (s ^ (1 << kg[i][1]));
-                if(next == e){
-                    cout << "Mr. Black needs " << step << " steps."<< endl;
+                pair<int, int> nextSt = { r, s ^ (1 << kg[i][1]) };
+                if(nextSt == e){
+                    cout << "Mr. Black needs " << get<2>(st)+1 << " steps."<< endl;
                     return 0;
                 }
-            
-                if(foot.count(next) == 0){
-                    qu.push({next, st.second+1});
-                    foot.insert(next);
+                if(foot.count(nextSt) == 0){
+                    qu.push({r, nextSt.second, get<2>(st)+1});
+                    foot.insert(nextSt);
                 }
             }
         }
-
         for(int i=0; i<D; i++){
-            if(edge[i][0] == r){
-                int next = (edge[i][1] << 16)+ s;
-                if(foot.count(next) == 0){
-                    qu.push({next, st.second+1});
-                    foot.insert(next);
+            if(edge[i][0] == r && (s & (1<<edge[i][1]))){
+                pair<int, int> nextSt ={ edge[i][1], s};
+                if(foot.count(nextSt) == 0){
+                    qu.push({edge[i][1], s, get<2>(st)+1});
+                    foot.insert(nextSt);
                 }
             }
-
-            if(edge[i][1] == r){
-                int next = (edge[i][0] << 16)+ s;
-                if(foot.count(next) == 0){
-                    qu.push({next, st.second+1});
-                    foot.insert(next);
+            if(edge[i][1] == r  && (s & (1<<edge[i][0]))){
+               pair<int, int> nextSt ={ edge[i][0], s};
+                if(foot.count(nextSt) == 0){
+                    qu.push({edge[i][0], s, get<2>(st)+1});
+                    foot.insert(nextSt);
                 }
             }
         }
-
     }
+
     cout << "Poor Mr. Black! No sleep tonight!" << endl;
     return 0;
 }
