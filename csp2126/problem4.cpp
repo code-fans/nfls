@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 char a[30][30];
-bool vis[30][30][1050];
+int vis[30][30];
 int main()
 {
     freopen("game.in","r",stdin);
