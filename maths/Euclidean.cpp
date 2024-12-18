@@ -7,7 +7,7 @@ using namespace std;
 //           = a*y1 +b(x1-a/b)y1 
 // x = y1 , y = (x1-a/b)y1
 // 欧几里得（辗转相除算法）最后一行 gcd(a,b) , 0 对应 1，0 肯定可以保证 gcd(a,b) * 1 = 0 * 0 = gcd(a,b)
-// 然后逐步会退，每一步都保证 a*x + b*y = gcd(a,b) 成立
+// 然后逐步回退，每一步都保证 a*x + b*y = gcd(a,b) 成立
 int exgcd(int a, int b, int& x, int& y) {
     if (b == 0) {
         x = 1, y = 0;
@@ -22,8 +22,19 @@ int exgcd(int a, int b, int& x, int& y) {
     cout << x <<'\t'<< y << endl;
     return r;
 }
-
-//
+// https://www.bilibili.com/video/BV1vL4y1L7c4/
+// r0=a r1=b                      s0=1, s1=0, t0=0, t1=1 =>  a*s[i]+b*s[i] = r[i]
+// r2=r0%r1 q1=r0/r1 r0=q1*r1+r2  r2 = r0 -q1*r1      => r[i] = r[i-2] -q[i-1]r[i-1]
+// r3=r1%r2 q2=r1/r2 r1=q2*r2+r3  r3 = r1 -q2*r2      => r[i] = r[i-2] -q[i-1]r[i-1]
+// 
+// 数学归纳法
+//  a(s[i-2]-s[i-1]q[i-1]) + b(t[i-2]-t[i-1]q[i-1])
+// =a*s[i-2]-a*s[i-1]q[i-1]+ b*t[i-2]-b*t[i-1]q[i-1]
+// =(a*s[i-2]+b*t[i-2]) -(a*s[i-1]+b*t[i-1])*q[i-1]
+// = r[i-2] -r[i-1]q[i-1]
+// = r[i]
+// => a*s[i] + b*r[i] = r[i] = a(s[i-2]-s[i-1]q[i-1]) + b(t[i-2]-t[i-1]q[i-1])
+// => s[i]=s[i-2]-s[i-1]q[i-1], r[i]=t[i-2]-t[i-1]q[i-1]
 int exgcd2(int a, int b, int& x, int& y) {
     int s0=1,s1=0,s2;
     int t0=0,t1=1,t2;
@@ -40,19 +51,12 @@ int exgcd2(int a, int b, int& x, int& y) {
     return a;
 }
 
-
 int main(){
-<<<<<<< HEAD
     int s,t, n, m;
     cin >> n >>m;
     cout << exgcd(n, m, s, t)<< endl;
     cout << "RESULT "<<s << ' ' << t<< endl;
      cout << exgcd2(n, m, s, t)<< endl;
     cout << "RESULT "<<s << ' ' << t<< endl;
-=======
-    int s,t;
-    cout << exgcd2(105, 66, s, t)<< endl;
-    cout <<s << ' ' << t<< endl;
->>>>>>> 7a9c9fff0f64192f4ac2be2f7e560f802c101f8d
     return 0;
 }
