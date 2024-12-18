@@ -1,4 +1,5 @@
 #include <iostream>
+#include <bitset>
 using namespace std;
 
 // https://www.luogu.com.cn/problem/P7071
@@ -19,6 +20,34 @@ int bitCount(int n){
         n &= n-1;
     }
     return bs;
+}
+
+
+int bitCount2(int n){
+    int ans = 0;
+    bool a = n<0;
+    if(a)
+        n = ~n;
+    while(n){
+        ans+=n%2;
+        n/=2;
+    }
+    if(a)
+        ans = 32-ans;
+    return ans;
+}
+
+
+int bitCount3(int n){
+    int ans=0;
+    cin>>n;
+    while (n){
+        ans++;
+        // string str = bitset<32>(n).to_string();
+        cout<< bitset<32>(n) << ' '<< n << '\t' << bitset<32>(n-1) << ' ' << n-1 << endl;
+        n&=(n-1);
+    }
+    return ans;
 }
 
 //汉明距离
