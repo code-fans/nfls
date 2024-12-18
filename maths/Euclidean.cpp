@@ -19,7 +19,7 @@ int exgcd(int a, int b, int& x, int& y) {
     int temp = x;
     x = y;
     y = temp - a / b * y;
-    cout << x <<'\t'<< y << endl;
+    // cout << x <<'\t'<< y << endl;
     return r;
 }
 // https://www.bilibili.com/video/BV1vL4y1L7c4/
@@ -35,11 +35,12 @@ int exgcd(int a, int b, int& x, int& y) {
 // = r[i]
 // => a*s[i] + b*r[i] = r[i] = a(s[i-2]-s[i-1]q[i-1]) + b(t[i-2]-t[i-1]q[i-1])
 // => s[i]=s[i-2]-s[i-1]q[i-1], r[i]=t[i-2]-t[i-1]q[i-1]
+//当 r[n+1] == 0 时 r[n] = gcd(a,b) , s[n],t[n]就是方程 a*x+b*y=gcd(a,b)的解
 int exgcd2(int a, int b, int& x, int& y) {
     int s0=1,s1=0,s2;
     int t0=0,t1=1,t2;
     while(b!=0){
-        cout << s1 << '\t' << t1 << endl;
+        // cout << s1 << '\t' << t1 << endl;
         int q=a/b, r=a%b;
         s2 = s0 - s1*q;
         t2 = t0 - t1*q;
@@ -51,12 +52,19 @@ int exgcd2(int a, int b, int& x, int& y) {
     return a;
 }
 
+// 求a对于b的逆元（乘法逆元），要求 a和m互素（互质）
+// a * s = 1 (MOD m)
+int inverseElement(int a, int m){
+    int x, y;
+    exgcd2(a, m, x, y);
+    return (x+m)%m; // s
+}
+
 int main(){
     int s,t, n, m;
     cin >> n >>m;
     cout << exgcd(n, m, s, t)<< endl;
     cout << "RESULT "<<s << ' ' << t<< endl;
-     cout << exgcd2(n, m, s, t)<< endl;
-    cout << "RESULT "<<s << ' ' << t<< endl;
+    cout << "RE "<< inverseElement(n, m)<< endl;
     return 0;
 }
