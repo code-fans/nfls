@@ -1,21 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 char a[30][30];
-bool vis[30][30][1500];
-struct position{int x, y, key, step;};
-int step[4][2] = { {1,0}, {-1,0}, {0,1}, {0,-1} };
-int main() {
-    freopen("game.in", "r", stdin);
-    freopen("game.out", "w", stdout);
-    int n, m;
-    cin >> n >> m;
-    int sx = -1, sy = -1;
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= m; j++) {
-            cin >> a[i][j];
-            if (a[i][j] == '@') {
-                sx = i; sy = j;
-                a[i][j] = '.';
+bool vis[30][30][1050];
+int main()
+{
+    freopen("game.in","r",stdin);
+    freopen("game.out","w",stdout);
+    int n,m;
+    cin>>n>>m;
+    int sx=-1,sy=-1;
+    for (int i = 1; i <= n; i++){
+        for (int j = 1; j <= m; j++){
+            cin>>a[i][j];
+            if(a[i][j]=='@'){
+                sx=i;
+                sy=j;
+                a[i][j]='.';
             }
         }
     }
