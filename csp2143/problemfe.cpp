@@ -35,3 +35,5 @@ int main(){
     cout<<ans<<endl;
     return 0;
 }
+// 5 11 1 1 1 1
+// 5 1 11 1 1 1
