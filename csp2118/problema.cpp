@@ -18,7 +18,7 @@ int main()
         while(h>and1 && a[h-1][0]>=all[i])
             h--;
         while(h1>and2 && b[h1-1][0]<=all[i])
-            h1--;
+            h1--
         a[h][1]=i;
         a[h][0]=all[i];
 
