@@ -1,52 +1,35 @@
-#include <iostream>
-#include <algorithm>
-#include <utility>
-#include <vector>
-#include <cmath>
-using namespace std;
-vector<pair<long long, long long> > site;
-vector<pair<long long, long long> > van;
-
-bool cmpVan(pair<long long, long long> & a, pair<long long, long long> & b){
-    return abs(a.first - a.second) > abs(b.first- b.second);
-}
-int n,m,x;
-int main(){
-    int a,b;
-    cin >> n >> m >> x;
-    for(int i=0; i<n; i++){
-        cin >> a >> b;
-        site.push_back(make_pair(a,b));
+#include <bits/stdc++.h>                                 
+using namespace std;                                     
+int a[1000][1000],k,f[1000][1000];                       
+int n,m;                                                 
+int main()
+{
+    char a1;
+    cin>>n>>m>>k;
+    for (int i = 1; i <= n; i++){
+        for (int j = 1; j <= m; j++){
+            cin>>a1;
+            a[i][j]=a1-48;
+            f[i][j]+=a[i][j];
+            f[i][j]=f[i][j]+f[i-1][j]+f[i][j-1]-f[i-1][j-1];
+        }
     }
-    for(int i=0; i<m; i++){
-        cin >> a >> b;
-        van.push_back(make_pair(a,b));
-    }
-    sort(site.begin(), site.end());
-    sort(van.begin(), van.end(), cmpVan);
-    long long ans = 0;
-    for(int i=0; i<van.size(); i++){
-        pair<long long, long long> & truck = van[i];
-        if(truck.first > truck.second){
-            for(int j=0; j<site.size(); j++){
-                pair<long long, long long> & v = site[j];
-                if(v.second > 0){
-                    v.second --;
-                    ans += truck.first * v.first * 2 + truck.second * (x-v.first) * 2;
-                    break;
-                }
-            }
-        } else {
-            for(int j=site.size()-1; j>=0; j--){
-                pair<long long, long long> & v = site[j];
-                if(v.second > 0){
-                    v.second --;
-                    ans += truck.first * v.first * 2 + truck.second * (x-v.first) * 2;
-                    break;
+    int ans=1000000000;
+    for (int i = 1; i <= n; i++){
+        for(int j = 1;j <= m;j++){
+            for (int w = i; w <= n; w++){
+                for (int l = j; l <= m; l++){
+                    if(f[w][l]-f[i-1][l]-f[w][j-1]+f[i-1][j-1]>=k){
+                        ans=min(ans,(w-i+1)*(l-j+1));
+                    }
                 }
             }
         }
     }
-    cout << ans << endl;
+    if(ans==1000000000)
+        cout<<0<<endl;
+    else
+        cout<<ans<<endl;
     return 0;
+    
 }

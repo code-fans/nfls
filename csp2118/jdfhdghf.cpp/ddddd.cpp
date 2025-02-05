@@ -1,19 +1,26 @@
-#include <bits/stdc++.h>
-#define int long long
-using namespace std;
-int a[1000001], ans[1000001];
-signed main() {
-    int n;
-    cin >> n;
-    for (int i = 1; i <= n; i++)
-        cin>>a[i];
-    for (int i = 1; i <= n; i++) {
-        if (i <= 2)
-            ans[i] = a[i] + a[i - 1];
-        else
-            ans[i] = max(a[i] + ans[i - 2], a[i] + a[i - 1] + ans[i - 3]);
-        ans[i] = max(ans[i], ans[i - 1]);
-    }
-    cout << ans[n]<<endl;
-    return 0;
-}
+内存限制：256 MiB
+时间限制：1000 ms
+标准输入输出
+题目类型：传统
+评测方式：文本比较
+题目描述
+一个正整数被称为 “ 阶平滑数”，当且仅当它的任意一个素因子不超过 。
+
+给定正整数  和素数 。问不超过  的“ 阶平滑数”有多少个。
+
+输入格式
+ 
+
+输出格式
+输出不超过  的“ 阶平滑数”的个数。
+
+样例
+样例输入1
+36 3
+样例输出1
+14
+样例输入2
+10000000000000000 97
+样例输出2
+2345134674
+用c++解决
