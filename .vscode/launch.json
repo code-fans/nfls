@@ -22,7 +22,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/runtime/${fileBasenameNoExtension}.o",
-            "args": [],
+            "args": ["${workspaceFolder}/runtime/input.txt", "${workspaceFolder}/runtime/output.txt"],
             "cwd": "${workspaceFolder}/runtime",
             "stopAtEntry": false, // if true then stop at the main entry (function)
             "environment": [],

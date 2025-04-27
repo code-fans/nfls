@@ -1,17 +1,8 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-unordered_set<string> htab;
+
 int main()
 {
-    int n;
-    string str;
-    cin>>n;
-    for (int i = 1; i <= n; i++){
-        cin>>str;
-        if(htab.count(str)==0){
-            htab.insert(str);
-            cout<<i<<endl;
-        }
-    }
+    cout << ( (1l<<31)-1) << endl;
     return 0;
 }

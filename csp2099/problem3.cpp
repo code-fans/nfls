@@ -1,50 +1,74 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 using namespace std;
-int bida(char a) {
-    if (a == '(')
-        return 4;
-    if (a == '*' || a == '/')
-        return 3;
-    if (a == '+' || a == '-')
-        return 2;
-    return 1;
-}
-
-
-char b[10000];
-
-int main() {
-    
-    int sizea = 0, sizeb = 0;
-    
-    string str;
-    cin >> str;
-    str.push_back(')');
-    string num = "";
-    int ismun = 0;
-    for (int i = 0; i < str.size(); i++) {
-        if (str[i] >= '0' && str[i] <= '9') {
-            num += str[i];
-            ismun = 1;
-        } else {
-            if (ismun) {
-                cout << num << ' ';
-                ismun = 0;
-                num = "";
+#define ll long long
+const int N = 1e5 + 10;
+int a[N];
+int nxt[N][30], pos[20];
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        memset(pos, 0, sizeof pos);
+        for (int i = 1; i <= n; i++)
+        {
+            cin >> a[i];
+            for (int j = 0; j <= 20; j++)
+                nxt[i][j] = n + 1;
+        }
+        for (int i = n; i >= 1; i--)
+        {
+            if (!pos[a[i]])
+            {
+                nxt[i][0] = n + 1;
+                pos[a[i]] = i;
             }
-            while (sizeb >= 1 && bida(str[i]) <= bida(b[sizeb - 1]) && b[sizeb - 1] != '(') {
-                cout<< b[sizeb - 1]<<' ';
-                sizeb--;
-            }
-            if (sizeb > 0 && b[sizeb - 1] == '(' && str[i] == ')')
-                sizeb--;
-            else {
-                b[sizeb] = str[i];
-                sizeb++;
+            else
+            {
+                nxt[i][0] = pos[a[i]];
+                pos[a[i]] = i;
             }
         }
+        for (int j = 1; j <= 20; j++)
+        {
+            for (int i = 1; i <= n; i++)
+            {
+                if (nxt[i][j - 1] + 1 <= n)
+                    nxt[i][j] = nxt[nxt[i][j - 1] + 1][j - 1];
+            }
+        }
+        int q;
+        cin >> q;
+        while (q--)
+        {
+            int l, r;
+            cin >> l >> r;
+            int ii = l;
+            int ans = 0;
+            while (ii <= r)
+            {
+                while (ii <= r && nxt[ii][0] > r)
+                {
+                    ii++;
+                    ans++;
+                }
+                if (ii > r)
+                    break;
+                for (int j = 20; j >= 0; j--)
+                {
+                    if (nxt[ii][j] <= r)
+                    {
+                        ii = nxt[ii][j];
+                        break;
+                    }
+                }
+                ii++;
+            }
+            cout << ans << endl;
+        }
     }
-    cout<<endl;
-    return 0;
 }

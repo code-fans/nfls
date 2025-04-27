@@ -1,47 +1,33 @@
 #include <iostream>
-#include <cstring>
-#include <map>
 #include <utility>
 using namespace std;
 
+long long gcd(long long a, long long b){
+    if(b==0) return a;
+    return gcd(b, a%b);
+}
+
 int main(){
 	ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
-
-    int T,N,M, t;
-    cin >>T;
-    while(T--){
-        cin >> N;
-        int nextPos[15100] = {0};
-        int lastCard[15] = {0};
-        for(int i=1; i<=N; i++){
-            cin >> t;
-            if(lastCard[t] > 0){
-                nextPos[lastCard[t]] = i;
-            }
-            lastCard[t] = i;
-        }
-        cin >> M;
-        while(M--){
-            int b,e, ans = 0;
-            map< <pair<int,int> , int > quest;
-            cin >> b >> e;
-            if(quest.count({b,e})>0){
-                ans = quest[{b,e}];
-            } else {
-                while(b<=e){
-                    if(nextPos[b]>0 && nextPos[b]<=e){
-                        b = nextPos[b];
-                    } else {
-                        ans ++;
-                    }
-                    b++;
-                }
-                quest[{b,e}] = ans;
-            }
-            cout << ans << endl;
-        }
+	long long l, v1, v2, t;
+    cin >> l >> v1 >> v2 >> t;
+    if(v1>v2){
+        swap(v1, v2);
     }
+    if(v2==0){
+        cout << 0 << endl;
+        return 0;
+    }
+    if(v1==0){
+        cout << (v2*t / l +1) / 2  << endl;
+        return 0;
+    }
+    long long sum= v2+ v1, diff= v2- v1;
+    long long ans= (sum*t+ l)/ (2* l)+(diff*t+ l)/(2* l);
+    long long d= __gcd(v1, v2);
+    if( (v1/d % 2) != (v2 /d % 2))
+        ans -=(d*t+ l)/ (2*l);
+
+    cout << ans << endl;
     return 0;
 }
