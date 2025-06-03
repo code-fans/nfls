@@ -1,0 +1,1 @@
+{"name":"Local: P10264","url":"/Users/codefan/projects/cplusplus/nfls/gesp5/P10264.cpp","tests":[{"id":1745459355696,"input":"12 3 4 13","output":"4"},{"id":1745459415212,"input":"12 3 4 17","output":"5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/codefan/projects/cplusplus/nfls/gesp5/P10264.cpp","group":"local","local":true}

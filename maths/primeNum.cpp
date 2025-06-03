@@ -5,12 +5,22 @@ int n=0;
 int maxn = 100000000;
 
 bool isprime(int p){
+    if(p<2) return false;
+    for(int i=2; i*i<=p; i++){
+        if(p % i ==0 )
+            return false;
+    }
+    return true;
+}
+
+bool isprime2(int p){
     for(int i=0; i<n && pn[i]*pn[i]<=p; i++){
         if(p%pn[i]==0)
             return false;
     }
     return true;
 }
+
 int main(){
     pn[0] = 2;
     n=1;

@@ -1,62 +1,53 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-int A,B,C;
-int ckn [25]={0};
-set<int> states;
 
-void dfs(int a,int b,int c){
-    if(a==0) ckn[c] = 1;
-    int st = a+b*100+c*10000;
-    if(states.count(st)>0) return;
-    states.insert(st);
-    int a1=a,b1=b,c1=c;
-    if(a>0){
-        // a->b
-        int p = min(a, B-b);
-        a1 = a - p;
-        b1 = b + p;
-        dfs(a1,b1,c);
-        // a->c
-        p = min(a, C-c);
-        a1 = a - p;
-        c1 = c + p;
-        dfs(a1,b,c1);
+vector<int> qu[10100];
+int l, s[6];
+int dfs(int i, int b, int a[]){
+    auto it = upper_bound(qu[s[i]].begin(), qu[s[i]].end(), b);
+    if (it == qu[s[i]].end()) {
+        if(i<l-1)
+            return dfs(i + 1, b, a);
+        return 0;
     }
-    if(b>0){
-        // b->a
-        int p = min(b, A-a);
-        a1 = a + p;
-        b1 = b - p;
-        dfs(a1,b1,c);
-        // b->c
-        p = min(b, C-c);
-        b1 = b - p;
-        c1 = c + p;
-        dfs(a,b1,c1);
+    a[0] = s[i];
+    if (i == l - 1) {
+        return 1;
     }
-    if(c>0){
-        // c->b
-        int p = min(c, B-b);
-        c1 = c - p;
-        b1 = b + p;
-        dfs(a,b1,c1);
-        // c->a
-        p = min(c, A-a);
-        a1 = a + p;
-        c1 = c - p;
-        dfs(a1,b,c1);
+    int p1 = *it;
+    int l1 = dfs(i + 1, p1, a+1) + 1;
+
+    int a2[6];
+    int l2 = dfs(i + 1, b, a2 );
+
+    if (l1 > l2 || (l1 == l2 && a[0] < a2[0])) {
+        return l1;
     }
+    memcpy(a, a2, sizeof(int)*l2);
+    return l2;
 }
 
-int main()
-{
-    cin>>A>>B>>C;    
-    dfs(0, 0, C);
-    for (int i = 0; i < C; i++){
-        if(ckn[i]==1)
-            cout<<i<<' ';
+int main() {
+    ios::sync_with_stdio(false);
+    int n, m, t;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> t;
+        qu[t].push_back(i);
     }
-    cout<<C<<endl;
+    cin >> m;
+    while (m--) {
+        cin >> l;
+        for(int i = 0; i < l; i++){
+            cin >> s[i];
+        }
+        int an[10] = {0};
+        int ans = dfs(0, 0, an);
+        cout << ans;
+        for(int i = 0; i < ans; i++){
+            cout << " " << an[i];
+        }
+        cout << endl;
+    }
     return 0;
 }
-1392c730239402b38926b7c3c9944202
