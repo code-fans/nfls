@@ -1,15 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
-int a[2000000];
-long long dp[2000000],dp2[2000000];
-int main() {
-    int n;
-    cin>>n;
-    for (int i = 1; i <= n; i++)
-        cin >> a[i];
-    dp[2] = a[1] + a[2];
-    for (int i = 3; i <= n; i++){
-        dp[i]=max(dp[i - 1],dp[i - 3]+a[i - 1]+a[i]);
+
+void jcw(long long n){
+    long long ans=1;
+    for(long long i=2; i<=n; i++){
+        ans *= i;
+        while(ans%10==0) ans/=10;
+        ans %= 1000000000000l;
+        cout << ans << endl;
     }
+}
+
+int main(){
+    jcw(100);
     return 0;
 }

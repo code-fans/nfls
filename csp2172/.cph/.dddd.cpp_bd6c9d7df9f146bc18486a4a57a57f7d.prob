@@ -1,0 +1,1 @@
+{"name":"Local: dddd","url":"d:\\projects\\cplusplus\\nfls\\csp2172\\dddd.cpp","tests":[{"id":1748951299295,"input":"2\n1 2","output":"pairwise coprime\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\projects\\cplusplus\\nfls\\csp2172\\dddd.cpp","group":"local","local":true}

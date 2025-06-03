@@ -1,68 +1,40 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
-
-int PN[] = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
-int pn[25] , pns=0;
-long long N,K;
-vector<long long> dfs1(int b, int e){
-	vector<long long> ans;
-	if(b==e) return ans;
-	if(b == e-1){
-		long long v =1,  k = pn[b];
-		while(v<=N){
-			ans.push_back(v);
-			v *= k;
-		}
-		return ans;
-	}
-	int mid = (b+e)/2;
-	vector<long long> v1 = dfs1(b, mid);
-	vector<long long> v2 = dfs1(mid, e);
-	if(v1.empty()) return v2;
-	if(v2.empty()) return v1;
-	sort(v2.begin(), v2.end());
-	for(long long i : v1){
-		for(long long j : v2){
-			if( i*j<=N){
-				ans.push_back(i*j);
-			}else{
-				break;
-			}
-		}
-	}
-	// sort(ans.begin(), ans.end());
-	return ans;
+int n;
+int a[21][21];
+map<int, int> cnt[21];
+long long ans = 0;
+void dfs1(int x, int y, int s) {
+    if (x == n/2+1) {
+        cnt[y][s]++;
+        return;
+    }
+	s ^= a[x][y];
+    dfs1(x + 1, y, s);
+	if(y+1<=n)
+    	dfs1(x, y + 1, s);
 }
 
-int main()
-{
-	cin >> N >> K;
-	for(int i=0;i<25; i++){
-		if(PN[i]<=K){
-			pn[pns++] = PN[i];
-		}else{
-			break;
-		}
-	}
-	//洗牌
-	for(int i=0; i<pns/2; i+=2){
-		swap(pn[i], pn[pns-1-i]);
-	}
-	int mid = pns/2;
-	vector<long long> a = dfs1(0, mid);
-	vector<long long> b = dfs1(mid, pns);
-	if(a.empty() || b.empty()){
-		cout << a.size() + b.size() << endl;
-		return 0;
-	}
-	sort(b.begin(), b.end());
-	long long ans=0;
-	for(long long i : a){
-		long long k = N/i;
-		ans += upper_bound(b.begin(), b.end(), k) - b.begin();
-	}
-	cout << ans << endl;
-	return 0;
+void dfs2(int x, int y, int s) {
+    if (x == n/2) {
+        ans += cnt[y][s];
+        return;
+    }
+    s ^= a[x][y];
+    dfs2(x - 1, y, s);
+	if(y-1>=1)
+    	dfs2(x, y - 1, s);
+}
+
+int main() {
+	freopen("../csp2118/input.txt", "r", stdin);
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            cin >> a[i][j];
+        }
+    }
+    dfs1(1, 1, 0);
+    dfs2(n, n, 0);
+    cout << ans << endl;
 }

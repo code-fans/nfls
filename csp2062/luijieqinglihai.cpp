@@ -1,4 +1,4 @@
-#pragma GCC optimize(3)
+#pragma ios optimize(3)
 #include <bits/stdc++.h>
 using namespace std;
 long long a[1001000][5], b[1001000][2];

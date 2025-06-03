@@ -1,39 +1,72 @@
+#pragma GCC optimize(3)
 #include <bits/stdc++.h>
 using namespace std;
-int a[1000],b[1000],c[1000],f[401][401];
-int main()
-{
-    // freopen("../csp2118/input.txt","r", stdin);
-    int ma,mb,mc;
-    cin>>ma>>mb>>mc;
-    int ans=1e9;
-  
-    memset(f, 0x3f, sizeof(f));
-    
-    f[0][0]=0;
-    for (int i = 1; i <= ma; i++)
-        cin>>a[i]>>b[i]>>c[i];
+long long n, t;
+long long a[21][21];
+unordered_map<long long, long long> dp[21][21];
+int main() {
+    //freopen("../csp2118/input.txt", "r", stdin);
+    char c;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> a[i][j];
+        }
+    }
 
-    for (int i = 1; i <= ma; i++){
-        for (int j = 400; j >= 0 ; j--){
-            for (int k = 400; k >= 0; k--){
-                if(j>=a[i]&&k>=b[i]){
-                    f[j][k]=min(f[j][k],f[j-a[i]][k-b[i]]+c[i]);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n - i; j++) {
+            t = a[i][j];
+            if (i == 0 && j == 0) {
+                dp[i][j][t] = 1;
+            } else {
+                if (i > 0) {
+                    for (const auto& pair : dp[i - 1][j]) {
+                        dp[i][j][pair.first ^ t] += pair.second;
+                    }
+                }
+                if (j > 0) {
+                    for (const auto& pair : dp[i][j - 1]) {
+                        dp[i][j][pair.first ^ t] += pair.second;
+                    }
                 }
             }
         }
     }
-
-    for (int i = 1; i <= 400; i++){
-        for (int j = 1; j <= 400; j++){
-            if(i*mc == j*mb){
-                ans=min(f[i][j], ans);
+    long long ans = 0;
+    for (int i = n - 1; i > 0; i--) {
+        int j;
+        for (j = n - 1; j >= n - i; j--) {
+            t = a[i][j];
+            if (i == n - 1 && j == n - 1) {
+                dp[i][j][t] = 1;
+            } else {
+                if (i < n - 1) {
+                    for (const auto& pair : dp[i + 1][j]) {
+                        dp[i][j][pair.first ^ t] += pair.second;
+                    }
+                }
+                if (j < n - 1) {
+                    for (const auto& pair : dp[i][j + 1]) {
+                        dp[i][j][pair.first ^ t] += pair.second;
+                    }
+                }
+            }
+        }
+        j++;
+        for (const auto& pair : dp[i - 1][j]) {
+            if (dp[i][j].count(pair.first) > 0) {
+                long long l = pair.second * dp[i][j][pair.first];
+                ans += l;
+            }
+        }
+        for (const auto& pair : dp[i][j - 1]) {
+            if (dp[i][j].count(pair.first) > 0) {
+                long long l = pair.second * dp[i][j][pair.first];
+                ans += l;
             }
         }
     }
-    if(ans>=1e9)
-        cout<<-1<<endl;
-    else
-        cout<<ans<<endl;
+    cout << ans << endl;
     return 0;
 }

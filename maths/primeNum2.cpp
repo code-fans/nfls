@@ -63,6 +63,7 @@ void euler(int maxN, bool isPrint){
 			if(i%pn[j]==0)break;
 		}
 	}
+    
     if(isPrint){
         for(int i=0; i<pSum; i++){
             if(i%10==0)

@@ -1,4 +1,4 @@
-#pragma GCC optimize(3)
+#pragma ios optimize(3)
 #include <iostream>
 #include <cstring>
 #include <cmath>
